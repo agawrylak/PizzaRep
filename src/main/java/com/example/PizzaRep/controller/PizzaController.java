@@ -3,6 +3,7 @@ package com.example.PizzaRep.controller;
 import com.example.PizzaRep.model.Ingredient;
 import com.example.PizzaRep.model.Pizza;
 import com.example.PizzaRep.model.POJO.PizzaPOJO;
+import com.example.PizzaRep.repository.IngredientRepository;
 import com.example.PizzaRep.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ public class PizzaController{
 
     @Autowired
     PizzaRepository pizzaRepository;
+    @Autowired
+    IngredientRepository ingredientRepository;
 
     @GetMapping("pizza/testcreate")
     public String testCreate(){
@@ -41,6 +44,22 @@ public class PizzaController{
 
         return "Pizza is created";
     }
+
+    @RequestMapping("pizza/update/{id}/{ingredient}")
+    public String addIngredientToPizza(@PathVariable long id, @PathVariable String ingredient){
+        Ingredient tempIngredient;
+        System.out.println(ingredientRepository.findByName(ingredient));
+        if(ingredientRepository.findByName(ingredient) == null){
+            tempIngredient = new Ingredient(ingredient);
+
+        }else{
+            tempIngredient = ingredientRepository.findByName(ingredient);
+        }
+        pizzaRepository.findById(id).get().getIngredients().add(tempIngredient);
+        pizzaRepository.flush();
+        return "Pizza succesfully updated.";
+    }
+
     @GetMapping("pizza/findall")
     public List<PizzaPOJO> findAll(){
         List<Pizza> pizzas = pizzaRepository.findAll();
@@ -68,6 +87,7 @@ public class PizzaController{
         pizza = pizzaRepository.findById(id).toString();
         return pizza;
     }
+
     @RequestMapping("pizza/searchbyname/{name}")
     public List<PizzaPOJO> fetchDataByPizzaName(@PathVariable String name){
         List<Pizza> pizzas = pizzaRepository.findByName(name);

@@ -2,6 +2,7 @@ package com.example.PizzaRep.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,4 +58,22 @@ public class Pizza implements Serializable {
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+    //TODO: check if this is working
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pizza pizza = (Pizza) o;
+        return id == pizza.id &&
+                name.equals(pizza.name) &&
+                ingredients.equals(pizza.ingredients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, ingredients);
+    }
 }
+
