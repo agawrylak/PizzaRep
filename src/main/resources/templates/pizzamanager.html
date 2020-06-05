@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Pizza Manager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/bootstrap.css"
+          th:href="@{/css/bootstrap.css}"/>
+
+</head>
+
+<body>
+
+
+<div class="pizzaList" th:unless="${#lists.isEmpty(allPizzas)}">
+
+
+    <h2 th:text="#{title.list}">List of Pizzas</h2>
+
+    <table>
+        <thead>
+        <tr>
+
+            <th th:text="#{pizzarep.name}">Name</th>
+            <th th:text="#{pizzarep.ingredients}">Ingredients</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pz : ${allPizzas}">
+
+            <td th:text="${pz.name}">Margarita</td>
+
+            <td>
+                <table>
+                    <tbody>
+                    <tr th:each="ingredient,ingredientStat : ${pz.ingredients}">
+                        <td th:text="${ingredient.name}">Tomato Sauce</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div>
+
+    <h2 th:text="#{title.new}">Add new pizza</h2>
+
+    <form action="#" th:action="@{/pizzamanager}" th:object="${pizza}" method="post">
+
+        <fieldset>
+
+            <legend th:text="#{pizzarep.data}">Pizza Data</legend>
+
+            <div>
+                <label th:text="#{pizzarep.name}"> Pizza Name </label>
+                <input type="text" th:field="*{name}"/>
+            </div>
+
+            <div>
+                <label th:text="#{pizzarep.ingredients}">Ingredients</label>
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th th:text="#{pizzarep.ingredients.name}">Name</th>
+
+                        <td>
+                            <button type="submit" name="addIngredient" th:text="#{pizzarep.ingredients.add}">Add ingredient</button>
+                        </td>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    <tr th:each="ingredient, iStat : *{ingredients}">
+
+                        <td>
+                            <input type="text" th:field="*{ingredients[__${iStat.index}__].name}"/>
+                        </td>
+                        <td>
+                            <button type="submit" name="removeIngredient" th:value="${iStat.index}"
+                                    th:text="#{pizzarep.ingredients.remove}">Remove ingredient
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="submit">
+                <button type="submit" name="save" th:text="#{pizzarep.create}">Add pizza</button>
+            </div>
+
+        </fieldset>
+
+    </form>
+
+</div>
+
+
+</body>
+</html>

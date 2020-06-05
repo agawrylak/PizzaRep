@@ -1,4 +1,4 @@
-package com.example.PizzaRep.model;
+package com.example.PizzaRep.business.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +20,9 @@ public class Ingredient implements Serializable {
     private Set<Pizza> pizzas = new HashSet<>();
 
     //constructor
-    protected Ingredient() { }
+    public Ingredient() {
+        super();
+    }
 
     public Ingredient(String name) {
         this.name = name;
@@ -44,4 +46,6 @@ public class Ingredient implements Serializable {
     public void setPizzas(Set<Pizza> pizzas) {
         this.pizzas = pizzas;
     }
+
+
 }

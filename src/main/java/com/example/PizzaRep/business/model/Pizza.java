@@ -1,9 +1,10 @@
-package com.example.PizzaRep.model;
+package com.example.PizzaRep.business.model;
+
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,14 +23,16 @@ public class Pizza implements Serializable {
     @JoinTable(name = "pizza_ingredient",
             joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-    private Set<Ingredient> ingredients;
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     //constructor
-    protected Pizza() { }
+    public Pizza() {
+        super();
+    }
 
     public Pizza(String name, Ingredient... ingredients) {
         this.name = name;
-        this.ingredients = Stream.of(ingredients).collect(Collectors.toSet());
+        this.ingredients = Stream.of(ingredients).collect(Collectors.toList());
         this.ingredients.forEach(x -> x.getPizzas().add(this));
     }
 
@@ -51,11 +54,11 @@ public class Pizza implements Serializable {
         this.name = name;
     }
 
-    public Set<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
