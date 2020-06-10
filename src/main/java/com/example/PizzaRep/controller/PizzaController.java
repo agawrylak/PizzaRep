@@ -2,7 +2,7 @@ package com.example.PizzaRep.controller;
 
 import com.example.PizzaRep.business.model.Ingredient;
 import com.example.PizzaRep.business.model.Pizza;
-import com.example.PizzaRep.business.services.PizzaService;
+import com.example.PizzaRep.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +22,8 @@ public class PizzaController {
 
     public PizzaController() {
         super();
+
+
     }
 
     @ModelAttribute("allPizzas")
@@ -29,10 +31,13 @@ public class PizzaController {
         return this.pizzaService.findAll();
     }
 
+    @ModelAttribute("chosenPizzas")
+    public List<Pizza> populateChosenPizza() {
+        return this.pizzaService.findAllChosen();
+    }
 
     @RequestMapping({"/testcreate"})
     public String testcreate() {
-
         Ingredient cheese = new Ingredient("Ser");
         Ingredient tomatoSauce = new Ingredient("Sos pomidorowy");
         Ingredient pineapple = new Ingredient("Ananas");
@@ -41,6 +46,7 @@ public class PizzaController {
         pizzaService.add("Bianca");
         pizzaService.add("Margarita", tomatoSauce, cheese);
         pizzaService.add("Hawajska", tomatoSauce, cheese, pineapple, bacon);
+
 
         return "pizzamanager";
     }
@@ -85,6 +91,19 @@ public class PizzaController {
         final Integer ingredientId = Integer.valueOf(req.getParameter("removeIngredient"));
         pizza.getIngredients().remove(ingredientId.intValue());
         return "pizzamanager";
+    }
+
+    @RequestMapping(value = "/pizzamanager/order")
+    public String clickOrder(@RequestBody String integer) {
+
+        integer=integer.replaceAll("=","");
+        System.out.println(integer);
+        Pizza p = this.pizzaService.findbyId(Integer.valueOf(integer));
+        p.setChosen(true);
+        this.pizzaService.add(p);
+
+
+        return "redirect:/pizzamanager";
     }
 
 

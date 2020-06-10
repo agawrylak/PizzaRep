@@ -1,144 +1,95 @@
+body,
 html {
-    background-color: #f0f0f0;
+    height: 100%;
 }
 
-body {
-    font-family: 'DejaVu Sans', Arial, Helvetica;
-    font-size: 12px;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    margin: 0px auto;
-    padding: 20px 20px;
-    width: 850px;
-}
-
-h2 {
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-form fieldset {
-    padding-top: 20px;
-}
-
-form div {
-    float: left;
-    clear: left;
-    width: 100%;
-    padding-bottom: 1em;
-}
-
-form div > label {
-    width: 250px;
-    display: block;
-    float: left;
-    text-align: right;
-    margin-right: 20px;
-    line-height: 20px;
-    padding: 0;
-    font-weight: bold;
-}
-
-form div > input, form div > select {
-    height: 20px;
-    margin: 0px;
-    padding: 0px;
-}
-
-form div > ul {
-    list-style: none;
-    padding: 0;
-    vertical-align: top;
-}
-
-form div > ul li {
-    padding: 0;
-    margin-left: 270px;
-}
-
-form div > table {
-    padding: 0;
-}
-
-form div > table td, form div > table th {
-    margin: 0;
-    padding: 1px 10px;
-}
-
-form div > table th {
-    font-weight: normal;
-    background-color: #ff9900;
-    color: #000000;
+.navbar-custom {
+    background-color: rgb(252, 242, 223);
 }
 
 
-form div.submit {
-    margin-top: 40px;
-    background-color: #cc3300;
+/* change the brand and text color */
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: brown;
+}
+
+
+/* change the link color */
+
+.navbar-custom .navbar-nav .nav-link {
+    color: brown;
+}
+
+
+/* change the color of active or hovered links */
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+#container1 {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    padding-top: 5px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#form_pizza {
+    background-color: rgb(252, 242, 223) !important;
+    border: 2px solid brown;
+    border-radius: 5px;
+    border-style: ridge;
     padding-bottom: 5px;
-    border: 1px solid #000000;
 }
 
-form div.submit button {
-    font-weight: bold;
-    font-variant: small-caps;
+#button_add_pizza {
+    align-items: center;
+    justify-content: center;
 }
 
-div.pizzaList {
-
+#container2 {
+    background-color: rgb(252, 242, 223) !important;
 }
 
-div.pizzaList > table {
-    width: 100%;
-    border: 1px solid #000;
-    border-collapse: collapse;
+#button_order {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-div.pizzaList > table > tbody > tr > td, div.pizzaList > table > thead > tr > th {
-    padding: 2px 10px;
-    border-left: 1px dotted #000000;
-    vertical-align: top;
-    line-height: 20px;
-}
-
-div.pizzaList > table > tbody > tr, div.pizzaList > table > thead > tr {
-    border-bottom: 1px solid #000000;
-}
-
-div.pizzaList > table th {
-    background-color: #cc3300;
-}
-
-div.pizzaList > table > tbody > tr > td > table {
-    width: 100%;
-    border-collapse: separate;
-}
-
-div.pizzaList > table > tbody > tr > td > table > tbody > tr> td {
-    background-color: #ff9900;
-    padding: 0px 5px;
-}
-
-div.pizzaList > table > tbody > tr > td > table > tbody > tr> td:last-child {
-    text-align: right;
-}
-
-
-.fieldError {
-    border: 1px solid red;
-}
-
-ul.errorlist {
-    border: 1px dotted #333;
-    margin: 10px 10px 50px 10px;
+#container3 {
+    text-align: center;
     padding: 10px;
 }
 
-ul.errorlist li {
-    list-style: none;
-    background-color: #f2d768;
-    padding: 5px;
-    margin: 3px 0px;
+#pizza_table {
+    border: 2px solid brown;
+    border-radius: 5px;
+    border-style: ridge;
+}
+
+.bg {
+    /* The image used */
+    background-image: url('../img/pizza_background.jpg');
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.table,
+.table tr,
+.table td {
+    background-color: rgb(252, 242, 223) !important;
+}
+
+.label {
+    background-color: rgb(252, 242, 223) !important;
 }

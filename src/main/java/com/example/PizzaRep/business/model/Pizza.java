@@ -1,7 +1,5 @@
 package com.example.PizzaRep.business.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -19,15 +17,24 @@ public class Pizza implements Serializable {
     @Column(name = "name")
     private String name;
 
+
+    @Column(name = "ischosen", nullable = false)
+    private boolean isChosen = false;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "pizza_ingredient",
             joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
     private List<Ingredient> ingredients = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name="order_id", referencedColumnName = "id")
+    private PizzaOrder order;
+
     //constructor
     public Pizza() {
         super();
+        isChosen = false;
     }
 
     public Pizza(String name, Ingredient... ingredients) {
@@ -77,6 +84,22 @@ public class Pizza implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, ingredients);
+    }
+
+    public boolean isChosen() {
+        return isChosen;
+    }
+
+    public void setChosen(boolean chosen) {
+        isChosen = chosen;
+    }
+
+    public PizzaOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(PizzaOrder order) {
+        this.order = order;
     }
 }
 
