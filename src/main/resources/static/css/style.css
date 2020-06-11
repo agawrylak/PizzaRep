@@ -5,6 +5,9 @@ html {
 
 .navbar-custom {
     background-color: rgb(252, 242, 223);
+    border: 2px solid brown;
+    border-radius: 5px;
+    border-style: ridge;
 }
 
 
@@ -31,15 +34,24 @@ html {
 }
 
 #container1 {
-    padding-top: 10px;
+    padding-top: 15px;
     display: flex;
     justify-content: center;
     text-align: center;
     width: 50%;
     margin: 0 auto;
+    padding-bottom: 15px;
 }
 
 #form_pizza {
+    background-color: rgb(252, 242, 223) !important;
+    border: 2px solid brown;
+    border-radius: 5px;
+    border-style: ridge;
+    padding-bottom: 5px;
+}
+
+#form_pizzaorder {
     background-color: rgb(252, 242, 223) !important;
     border: 2px solid brown;
     border-radius: 5px;
@@ -62,9 +74,13 @@ html {
     text-align: center;
 }
 
-#container3 {
+#container3{
+    text-align:center;
+}
+#container4,
+#container5{
     text-align: center;
-    padding: 10px;
+    padding-top: 15px;
 }
 
 #pizza_table {
@@ -78,10 +94,12 @@ html {
     background-image: url('../img/pizza_background.jpg');
     /* Full height */
     height: 100%;
+    width: 100%;
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: scroll;
 }
 
 .table,

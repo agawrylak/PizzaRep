@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Pizza Manager</title>
+    <title>Pizza Store</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -20,7 +20,9 @@
     <div class="bg">
 
         <nav class="navbar navbar-custom">
-            <a class="navbar-brand" th:text="#{title.application}" href="pizzamanager.html">Pizza Store</a>
+            <a class="navbar-brand" th:text="#{title.application.pizza}" href="pizzamanager">Pizza Store</a>
+            <a class="navbar-brand" th:text="#{title.application.order}" href="ordermanager"> Order <span class="sr-only">(current)</span></a>
+
         </nav>
 
         <div class="container" id="container1">
@@ -63,6 +65,8 @@
                     <tr>
                         <th scope="col" th:text="#{pizzarep.name}">Name</th>
                         <th scope="col" th:text="#{pizzarep.ingredients}">Ingredients</th>
+                        <th scope="col" th:text="#{pizzarep.isordered}">Is ordered?</th>
+
                         <th scope="col" th:text="#{pizzarep.order}">Order</th>
                     </tr>
                 </thead>
@@ -75,6 +79,7 @@
 
                             </ul>
                         </td>
+                        <td scope="row" th:text="#{|bool.${pz.chosen}|}"> Yes </td>
                         <td><button class="btn btn-info" th:attr="onclick=|onClick('${pz.getId()}')|" id="button_order">Order</button></td>
 
 
@@ -90,6 +95,7 @@
 
 
     </div>
+
 
 
 

@@ -1,5 +1,4 @@
 function onClick(args) {
-    console.log(args);
 
     $.ajax({
         type: "POST",
@@ -7,6 +6,7 @@ function onClick(args) {
         data: args,
         dataType: "text",
         success: function(response) {
+            location.reload();
         }
     });
 }

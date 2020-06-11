@@ -27,11 +27,15 @@ public class Pizza implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName = "id")
-    private PizzaOrder order;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "pizza_order",
+            joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "pizzaorder_id", referencedColumnName = "id"))
+    private List<PizzaOrder> pizzaOrders;
 
-    //constructor
+    @Transient
+    private double pizzaCost;
+
     public Pizza() {
         super();
         isChosen = false;
@@ -94,12 +98,24 @@ public class Pizza implements Serializable {
         isChosen = chosen;
     }
 
-    public PizzaOrder getOrder() {
-        return order;
+    public List<PizzaOrder> getPizzaOrders() {
+        return pizzaOrders;
     }
 
-    public void setOrder(PizzaOrder order) {
-        this.order = order;
+    public void setPizzaOrders(List<PizzaOrder> pizzaOrders) {
+        this.pizzaOrders = pizzaOrders;
+    }
+
+    public double getPizzaCost() {
+        double result = 10;
+        for (Ingredient ingredient: this.getIngredients()){
+            result+=3.50;
+        }
+        return result;
+    }
+
+    public void setPizzaCost(double pizzaCost) {
+        this.pizzaCost = pizzaCost;
     }
 }
 

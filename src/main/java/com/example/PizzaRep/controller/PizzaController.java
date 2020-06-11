@@ -19,36 +19,16 @@ public class PizzaController {
 
     @Autowired
     PizzaService pizzaService;
+    @Autowired
+    PizzaService pizzaOrderService;
 
     public PizzaController() {
         super();
-
-
     }
 
     @ModelAttribute("allPizzas")
     public List<Pizza> populatePizza() {
         return this.pizzaService.findAll();
-    }
-
-    @ModelAttribute("chosenPizzas")
-    public List<Pizza> populateChosenPizza() {
-        return this.pizzaService.findAllChosen();
-    }
-
-    @RequestMapping({"/testcreate"})
-    public String testcreate() {
-        Ingredient cheese = new Ingredient("Ser");
-        Ingredient tomatoSauce = new Ingredient("Sos pomidorowy");
-        Ingredient pineapple = new Ingredient("Ananas");
-        Ingredient bacon = new Ingredient("Bekon");
-
-        pizzaService.add("Bianca");
-        pizzaService.add("Margarita", tomatoSauce, cheese);
-        pizzaService.add("Hawajska", tomatoSauce, cheese, pineapple, bacon);
-
-
-        return "pizzamanager";
     }
 
     @RequestMapping({"/", "/pizzamanager"})
@@ -61,10 +41,8 @@ public class PizzaController {
         Pizza newPizza = new Pizza();
         model.addAttribute("pizza", newPizza);
         model.addAttribute("ingredients", newPizza.getIngredients());
-
         return "pizzamanager";
     }
-
 
     @RequestMapping(value = "/pizzamanager", params = {"save"}, method = RequestMethod.POST)
     public String savePizza(final Pizza pizza, final BindingResult bindingResult, final ModelMap model) {
@@ -76,7 +54,6 @@ public class PizzaController {
         model.clear();
         return "redirect:/pizzamanager";
     }
-
 
     @RequestMapping(value = "/pizzamanager", params = {"addIngredient"})
     public String addIngredient(final Pizza pizza, final BindingResult bindingResult) {
@@ -94,15 +71,13 @@ public class PizzaController {
     }
 
     @RequestMapping(value = "/pizzamanager/order")
-    public String clickOrder(@RequestBody String integer) {
-
+    public String clickOrder(@RequestBody String integer,final ModelMap model) {
         integer=integer.replaceAll("=","");
-        System.out.println(integer);
         Pizza p = this.pizzaService.findbyId(Integer.valueOf(integer));
-        p.setChosen(true);
+        p.setChosen(!p.isChosen());
         this.pizzaService.add(p);
-
-
+        model.clear();
+        model.addAttribute("allPizzas",populatePizza());
         return "redirect:/pizzamanager";
     }
 

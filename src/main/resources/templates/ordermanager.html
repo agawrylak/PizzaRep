@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Pizza Store</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" />
+    <script src="scripts/scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+
+<body>
+
+    <div class="bg">
+
+        <nav class="navbar navbar-custom">
+            <a class="navbar-brand" th:text="#{title.application.pizza}" href="pizzamanager">Pizza Store</a>
+            <a class="navbar-brand" th:text="#{title.application.order}" href="ordermanager"> Order <span class="sr-only">(current)</span></a>
+
+        </nav>
+
+
+        <div class="container" id="container4">
+
+            <form action="#" th:action="@{/ordermanager}" th:object="${pizzaorder}" method="post" id="form_pizzaorder">
+                <div class="form-group">
+
+                    <label for="ordername">Name</label>
+                    <input type="text" class="form-control" id="ordername" th:field="*{name}">
+
+                    <label for="ordersurname">Surname</label>
+                    <input type="text" class="form-control" id="ordersurname" th:field="*{surname}">
+
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" th:field="*{address}">
+
+                    <label for="phonenumber">Phone number</label>
+                    <input type="number" class="form-control" id="phonenumber" th:field="*{phoneNumber}">
+
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}">
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" id="button_add_order" th:text="#{order.create}" name="create_order">Make an order</button>
+            </form>
+
+        </div>
+
+        <div class="container" id="container5" th:unless="${#lists.isEmpty(chosenPizzas)}">
+
+            <table class="table table-bordered" id="pizza_table">
+
+                <thead>
+
+                    <tr>
+
+                        <th scope="col" th:text="#{pizzarep.name}">Name</th>
+                        <th scope="col" th:text="#{pizzarep.ingredients}">Ingredients</th>
+                        <th scope="col" th:text="#{pizzarep.cost}">Cost</th>
+
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    <tr th:each="pz : ${chosenPizzas}">
+
+                        <th scope="row" th:text="${pz.name}">Margarita</th>
+
+                        <td>
+
+                            <ul class="list-group" th:each="ingredient,ingredientStat : ${pz.ingredients}">
+                                <li class="list-group-item" th:text="${ingredient.name}">Tomato Sauce</li>
+                            </ul>
+
+                        </td>
+
+                        <th scope="row" th:text="${pz.getPizzaCost()} + PLN">10 PLN</th>
+
+
+                    </tr>
+
+                <tfoot>
+
+                    <tr>
+
+                        <td scope="row" th:text="#{pizzarep.order.cost}">total cost</td>
+                        <td scope="row" th:text="${pizzaPrices} + ' PLN'" colspan="2" >25PLN</td>
+
+                    </tr>
+
+                </tfoot>
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>

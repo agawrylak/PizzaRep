@@ -13,11 +13,11 @@ public class PizzaRepApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PizzaRepApplication.class, args);
 	}
-
+/*
 	@Autowired
 	private PizzaService pizzaService;
 
-	/*
+
 	@Bean
 	InitializingBean sendDatabase() {
 		return () -> {
