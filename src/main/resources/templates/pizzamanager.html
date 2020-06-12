@@ -30,7 +30,7 @@
             <form action="#" th:action="@{/pizzamanager}" th:object="${pizza}" method="post" id="form_pizza">
                 <div class="form-group">
                     <label for="exampleInputPizzaName">Pizza Name</label>
-                    <input type="text" class="form-control" id="exampleInputPizzaName" aria-describedby="pizzaName" th:field="*{name}">
+                    <input type="text" class="form-control" id="exampleInputPizzaName" aria-describedby="pizzaName" th:field="*{name}" required>
                 </div>
 
                 <div class="container" id="container2">
@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="ingredient, iStat : *{ingredients}">
-                                <td> <input type="text" class="form-control" th:field="*{ingredients[__${iStat.index}__].name}">
+                                <td> <input type="text" class="form-control" th:field="*{ingredients[__${iStat.index}__].name}" required>
                                 </td>
                                 <td><button type="submit" class="btn btn-danger" th:value="${iStat.index}" th:text="#{pizzarep.ingredients.remove}">Remove ingredient</button></td>
                             </tr>
@@ -60,37 +60,48 @@
         </div>
 
         <div class="container" id="container3" th:unless="${#lists.isEmpty(allPizzas)}">
+
             <table class="table table-bordered" id="pizza_table">
+
                 <thead>
-                    <tr>
-                        <th scope="col" th:text="#{pizzarep.name}">Name</th>
-                        <th scope="col" th:text="#{pizzarep.ingredients}">Ingredients</th>
-                        <th scope="col" th:text="#{pizzarep.isordered}">Is ordered?</th>
 
-                        <th scope="col" th:text="#{pizzarep.order}">Order</th>
-                    </tr>
+                <tr>
+
+                    <th scope="col" th:text="#{pizzarep.name}">Name</th>
+                    <th scope="col" th:text="#{pizzarep.ingredients}">Ingredients</th>
+
+
+
+                </tr>
+
                 </thead>
+
                 <tbody>
-                    <tr th:each="pz : ${allPizzas}">
-                        <th scope="row" th:text="${pz.name}">Margarita</th>
-                        <td>
-                            <ul class="list-group" th:each="ingredient,ingredientStat : ${pz.ingredients}">
-                                <li class="list-group-item" th:text="${ingredient.name}">Tomato Sauce</li>
+                <tr th:each="pz : ${allPizzas}">
 
-                            </ul>
-                        </td>
-                        <td scope="row" th:text="#{|bool.${pz.chosen}|}"> Yes </td>
-                        <td><button class="btn btn-info" th:attr="onclick=|onClick('${pz.getId()}')|" id="button_order">Order</button></td>
+                    <th scope="row" th:text="${pz.name}">Margarita</th>
+
+                    <td>
+
+                        <ul class="list-group" th:each="ingredient,ingredientStat : ${pz.ingredients}">
+                            <li class="list-group-item" th:text="${ingredient.name}">Tomato Sauce</li>
+                        </ul>
+
+                    </td>
 
 
-                    </tr>
+
+                </tr>
+
 
 
                 </tbody>
+
             </table>
 
 
         </div>
+
 
 
 

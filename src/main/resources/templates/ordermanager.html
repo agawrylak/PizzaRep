@@ -26,25 +26,71 @@
         </nav>
 
 
-        <div class="container" id="container4">
+        <div class="container" id="container4" th:unless="${#lists.isEmpty(allPizzas)}">
+            <table class="table table-bordered" id="pizza_table">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{pizzarep.name}">Name</th>
+                    <th scope="col" th:text="#{pizzarep.ingredients}">Ingredients</th>
+                    <th scope="col" th:text="#{pizzarep.cost}">Cost</th>
+                    <th scope="col" th:text="#{pizzarep.isordered}">Is ordered?</th>
+                    <th scope="col" th:text="#{pizzarep.order}">Order</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pz : ${allPizzas}">
+                    <th scope="row" th:text="${pz.name}">Margarita</th>
+                    <td>
+                        <ul class="list-group" th:each="ingredient,ingredientStat : ${pz.ingredients}">
+                            <li class="list-group-item" th:text="${ingredient.name}">Tomato Sauce</li>
+
+                        </ul>
+                    </td>
+                    <th scope="row" th:text="${pz.getPizzaCost()} + PLN">10 PLN</th>
+
+                    <td scope="row" th:text="#{|bool.${pz.chosen}|}"> Yes </td>
+                    <td><button class="btn btn-info" th:attr="onclick=|onClick('${pz.getId()}')|" id="button_order">Order</button></td>
+
+
+                </tr>
+                <tfoot>
+
+                <tr>
+
+                    <td scope="row" th:text="#{pizzarep.order.cost}" colspan="2">Total cost</td>
+                    <td scope="row" th:text="${pizzaPrices} + ' PLN'" colspan="3" >25PLN</td>
+
+                </tr>
+
+                </tfoot>
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+        <div class="container" id="container5">
 
             <form action="#" th:action="@{/ordermanager}" th:object="${pizzaorder}" method="post" id="form_pizzaorder">
                 <div class="form-group">
 
-                    <label for="ordername">Name</label>
-                    <input type="text" class="form-control" id="ordername" th:field="*{name}">
+                    <label for="ordername" th:text="#{pizzarep.name}">Name</label>
+                    <input type="text" class="form-control" id="ordername" th:field="*{name}" required>
 
-                    <label for="ordersurname">Surname</label>
-                    <input type="text" class="form-control" id="ordersurname" th:field="*{surname}">
+                    <label for="ordersurname" th:text="#{pizzarep.surname}">Surname</label>
+                    <input type="text" class="form-control" id="ordersurname" th:field="*{surname}" required>
 
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" th:field="*{address}">
+                    <label for="address" th:text="#{pizzarep.address}">Address</label>
+                    <input type="text" class="form-control" id="address" th:field="*{address}" required>
 
-                    <label for="phonenumber">Phone number</label>
-                    <input type="number" class="form-control" id="phonenumber" th:field="*{phoneNumber}">
+                    <label for="phonenumber" th:text="#{pizzarep.phonenumber}">Phone number</label>
+                    <input type="number" class="form-control" id="phonenumber" th:field="*{phoneNumber}" required>
 
-                    <label for="email">E-mail</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}">
+                    <label for="email" th:text="#{pizzarep.email}">E-mail</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" required>
 
                 </div>
 
@@ -54,58 +100,6 @@
 
         </div>
 
-        <div class="container" id="container5" th:unless="${#lists.isEmpty(chosenPizzas)}">
-
-            <table class="table table-bordered" id="pizza_table">
-
-                <thead>
-
-                    <tr>
-
-                        <th scope="col" th:text="#{pizzarep.name}">Name</th>
-                        <th scope="col" th:text="#{pizzarep.ingredients}">Ingredients</th>
-                        <th scope="col" th:text="#{pizzarep.cost}">Cost</th>
-
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-                    <tr th:each="pz : ${chosenPizzas}">
-
-                        <th scope="row" th:text="${pz.name}">Margarita</th>
-
-                        <td>
-
-                            <ul class="list-group" th:each="ingredient,ingredientStat : ${pz.ingredients}">
-                                <li class="list-group-item" th:text="${ingredient.name}">Tomato Sauce</li>
-                            </ul>
-
-                        </td>
-
-                        <th scope="row" th:text="${pz.getPizzaCost()} + PLN">10 PLN</th>
-
-
-                    </tr>
-
-                <tfoot>
-
-                    <tr>
-
-                        <td scope="row" th:text="#{pizzarep.order.cost}">total cost</td>
-                        <td scope="row" th:text="${pizzaPrices} + ' PLN'" colspan="2" >25PLN</td>
-
-                    </tr>
-
-                </tfoot>
-
-                </tbody>
-
-            </table>
-
-
-        </div>
 
     </div>
 

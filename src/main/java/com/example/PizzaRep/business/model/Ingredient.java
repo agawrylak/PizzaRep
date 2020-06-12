@@ -19,6 +19,7 @@ public class Ingredient implements Serializable {
     @ManyToMany(mappedBy = "ingredients")
     private Set<Pizza> pizzas = new HashSet<>();
 
+
     //constructor
     public Ingredient() {
         super();

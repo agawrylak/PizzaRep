@@ -31,6 +31,11 @@ public class PizzaOrderController {
         return this.pizzaService.findAllChosen();
     }
 
+    @ModelAttribute("allPizzas")
+    public List<Pizza> populatePizza() {
+        return this.pizzaService.findAll();
+    }
+
     @ModelAttribute("pizzaPrices")
     public double calculatePizzaPrices() {
         double result = 0;
@@ -68,6 +73,13 @@ public class PizzaOrderController {
         return "redirect:/pizzamanager";
     }
 
-
+    @RequestMapping(value = "/ordermanager/order")
+    public String clickOrder(@RequestBody String integer,final ModelMap model) {
+        integer=integer.replaceAll("=","");
+        Pizza p = this.pizzaService.findbyId(Integer.valueOf(integer));
+        p.setChosen(!p.isChosen());
+        this.pizzaService.add(p);
+        return "redirect:/pizzamanager";
+    }
 
 }

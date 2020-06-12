@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -19,8 +18,7 @@ public class PizzaController {
 
     @Autowired
     PizzaService pizzaService;
-    @Autowired
-    PizzaService pizzaOrderService;
+
 
     public PizzaController() {
         super();
@@ -70,16 +68,7 @@ public class PizzaController {
         return "pizzamanager";
     }
 
-    @RequestMapping(value = "/pizzamanager/order")
-    public String clickOrder(@RequestBody String integer,final ModelMap model) {
-        integer=integer.replaceAll("=","");
-        Pizza p = this.pizzaService.findbyId(Integer.valueOf(integer));
-        p.setChosen(!p.isChosen());
-        this.pizzaService.add(p);
-        model.clear();
-        model.addAttribute("allPizzas",populatePizza());
-        return "redirect:/pizzamanager";
-    }
+
 
 
 }
