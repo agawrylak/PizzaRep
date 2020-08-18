@@ -1,5 +1,9 @@
 package com.example.PizzaRep.business.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,6 +11,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ingredient")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Ingredient implements Serializable {
 
     @Id
@@ -18,35 +25,5 @@ public class Ingredient implements Serializable {
 
     @ManyToMany(mappedBy = "ingredients")
     private Set<Pizza> pizzas = new HashSet<>();
-
-
-    //constructor
-    public Ingredient() {
-        super();
-    }
-
-    public Ingredient(String name) {
-        this.name = name;
-    }
-
-    //getters & setters
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(Set<Pizza> pizzas) {
-        this.pizzas = pizzas;
-    }
-
 
 }

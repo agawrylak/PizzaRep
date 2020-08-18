@@ -34,6 +34,16 @@ public class PizzaController {
         return "pizzamanager";
     }
 
+    @RequestMapping({"/", "/gallery"})
+    public String showGallery() {
+        return "gallery";
+    }
+
+    @RequestMapping({"/", "/payment"})
+    public String showPayment() {
+        return "payment";
+    }
+
     @GetMapping("/pizzamanager")
     public String pizzaForm(Model model) {
         Pizza newPizza = new Pizza();

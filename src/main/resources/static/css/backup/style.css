@@ -3,17 +3,6 @@ html {
     height: 100%;
 }
 
-body {
-    /* The image used */
-    background-image: url('../img/pizza_background.jpg');
-    /* Full height */
-    height: 100%;
-    width: 100%;
-    /* Center and scale the image nicely */
-    font-family: "Lato";
-    font-size: 18px;
-}
-
 .navbar-custom {
     background-color: rgb(134, 22, 1);
 }
@@ -57,7 +46,6 @@ body {
     border-radius: 5px;
     border-style: ridge;
     padding-bottom: 5px;
-    padding: 5px;
 }
 
 #form_pizzaorder {
@@ -65,7 +53,7 @@ body {
     border: 2px solid brown;
     border-radius: 5px;
     border-style: ridge;
-    padding: 5px;
+    padding-bottom: 5px;
 }
 
 #button_add_pizza {
@@ -91,19 +79,25 @@ body {
 #container5 {
     text-align: center;
     padding-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-#container4 {
-    overflow-x: auto
 }
 
 #pizza_table {
     border: 2px solid brown;
     border-radius: 5px;
     border-style: ridge;
+}
+
+.bg {
+    /* The image used */
+    background-image: url('../img/pizza_background.jpg');
+    /* Full height */
+    height: 100%;
+    width: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
 }
 
 .table,
@@ -117,45 +111,15 @@ body {
 }
 
 #container6 {
-    padding-top: 15px;
-}
-
-.col-sm-8,
-.text-left {
     background-color: rgb(252, 242, 223) !important;
     border: 2px solid brown;
     border-radius: 5px;
     border-style: ridge;
+    padding-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
-
-#container7 {
-    display: inline-block;
-    padding-top: 15px;
-    padding-top: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 40%;
-}
-
-#list {
-    background-color: rgb(252, 242, 223) !important;
-    border: 2px solid brown;
-    border-radius: 5px;
-    border-style: ridge;
-}
-
-#payment_form {
-    background-color: rgb(252, 242, 223) !important;
-    border: 2px solid brown;
-    border-radius: 5px;
-    border-style: ridge;
-    padding: 10px;
 }
 
 .row.content {
@@ -164,30 +128,4 @@ body {
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
-}
-
-.flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    text-align: center;
-    padding: 10px;
-}
-
-.pizza_in_gallery {
-    border: 1px solid brown;
-    margin: 3px;
-}
-
-.pizza_in_gallery:hover {
-    opacity: 50%;
-}
-
-#gallery_title {
-    margin-top: 5px;
-    border: 2px solid brown;
-    border-radius: 5px;
-    border-style: ridge;
-    padding: 10px;
 }

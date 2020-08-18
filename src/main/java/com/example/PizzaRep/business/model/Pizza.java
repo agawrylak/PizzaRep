@@ -1,5 +1,9 @@
 package com.example.PizzaRep.business.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -8,6 +12,9 @@ import java.util.stream.Stream;
 
 @Entity
 @Table(name = "pizza")
+@Setter
+@Getter
+@EqualsAndHashCode
 public class Pizza implements Serializable {
 
     @Id
@@ -16,7 +23,6 @@ public class Pizza implements Serializable {
 
     @Column(name = "name")
     private String name;
-
 
     @Column(name = "ischosen", nullable = false)
     private boolean isChosen = false;
@@ -47,65 +53,6 @@ public class Pizza implements Serializable {
         this.ingredients.forEach(x -> x.getPizzas().add(this));
     }
 
-    //getters & setters
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    //TODO: check if this is working
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pizza pizza = (Pizza) o;
-        return id == pizza.id &&
-                name.equals(pizza.name) &&
-                ingredients.equals(pizza.ingredients);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, ingredients);
-    }
-
-    public boolean isChosen() {
-        return isChosen;
-    }
-
-    public void setChosen(boolean chosen) {
-        isChosen = chosen;
-    }
-
-    public List<PizzaOrder> getPizzaOrders() {
-        return pizzaOrders;
-    }
-
-    public void setPizzaOrders(List<PizzaOrder> pizzaOrders) {
-        this.pizzaOrders = pizzaOrders;
-    }
-
     public double getPizzaCost() {
         double result = 10;
         for (Ingredient ingredient: this.getIngredients()){
@@ -114,8 +61,6 @@ public class Pizza implements Serializable {
         return result;
     }
 
-    public void setPizzaCost(double pizzaCost) {
-        this.pizzaCost = pizzaCost;
-    }
+
 }
 
